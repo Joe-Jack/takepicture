@@ -1,0 +1,8 @@
+<h2>入力してください</h2>
+
+<%= form_for(@headline, url: new_headline_path) do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %><br>
+  
+  <%= f.submit "送信" %>
+<% end %>

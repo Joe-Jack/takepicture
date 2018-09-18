@@ -1,0 +1,40 @@
+
+<% @headlines.each_with_index do |headline, index| %>
+  <div id="hdln-<%= index %>">
+    <table>
+    <tr>
+      <th>番号</th>
+      <th>名前</th>
+      <th>総数</th>
+      <th>撮影</th>
+      <th>画像</th>
+    </tr>
+    <tr>
+      <td><%= headline.id %></td>
+      <td><%= headline.name %></td>
+      <td><%= headline.pictures_count %></td>
+    
+    
+    <!--今turbolink停止中-->
+    <td><%= link_to '撮影', headline_pictures_path(index+1),data: {"turbolinks" => false}, class:"hdln-"+index.to_s %></td>
+    <td><% headline.pictures.each do |hp| %>
+      
+      <%= image_tag hp.image_url.to_s %>
+    <% end %></td>
+    </table>
+  </div>
+  <br>
+  <script>
+  $(function(){
+	$('.hdln-<%= index %>').click(function(){
+    // alert(<%=index%>)
+    // 確認用undefined
+    // var x = document.getElementById('video');
+    // p = $("#picture_headline_id")
+    // alert(x)
+    });
+  })
+</script>
+<% end %>
+
+
