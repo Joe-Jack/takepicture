@@ -15,7 +15,7 @@ Rails.application.routes.draw do
 
  
  # エクセルをheadlineにインポートする
- resources :headlines, only: :new do
-  collection { post :import }
- end
+ # resources :headlines, only: :new do
+ #  collection { post :import }
+ # end
 end

@@ -13,20 +13,20 @@ class HeadlinesController < ApplicationController
     @headline = Headline.new
   end
   
-  # def create
-  #   @headline = Headline.new(headline_params)
-  #   if @headline.save
-  #     redirect_to headlines_path, notice: '保存しました。'
-  #   else
-  #     render :index
-  #   end
-  # end
-  
-  def import
-  # fileはtmpに自動で一時保存される
-    Headline.import(params[:file])
-    redirect_to headlines_path, notice: "アップロードしました。"
+  def create
+    @headline = Headline.new(headline_params)
+    if @headline.save
+      redirect_to headlines_path, notice: '保存しました。'
+    else
+      render :index
+    end
   end
+  
+  # def import
+  # # fileはtmpに自動で一時保存される
+  #   Headline.import(params[:file])
+  #   redirect_to headlines_path, notice: "アップロードしました。"
+  # end
   
   private
   def picture_params
@@ -35,7 +35,7 @@ class HeadlinesController < ApplicationController
   
   private
   def headline_params
-    params.require(:headline).permit(:name)
+    params.require(:headline).permit(:name, :num)
   end
 
 

@@ -11,22 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180918095708) do
+ActiveRecord::Schema.define(version: 20180925065555) do
 
   create_table "headlines", force: :cascade do |t|
     t.string   "name",           limit: 255
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
     t.integer  "pictures_count", limit: 4
+    t.integer  "num",            limit: 4
   end
 
   create_table "pictures", force: :cascade do |t|
-    t.text     "remote_image_url", limit: 65535
-    t.text     "image_url",        limit: 65535
-    t.string   "remark",           limit: 255
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
-    t.string   "headline_id",      limit: 255
+    t.text     "image_url",   limit: 65535
+    t.string   "remark",      limit: 255
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.string   "headline_id", limit: 255
+    t.binary   "blobpic",     limit: 16777215
   end
 
 end

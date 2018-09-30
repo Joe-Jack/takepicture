@@ -1,7 +1,14 @@
-<h2>入力してください</h2>
+<div class="container">
 
-<%= form_for(@headline, maltipart: true) do |f| %>
-  <%= f.label :name %> 
-  <%= f.file_field :name %><br>
-  <%= f.submit "送信" %>
-<% end %>
+  <h2>入力してください</h2>
+  <div class="form">
+    <%= form_for(@headline, maltipart: true) do |f| %>
+      <%= f.label :num %>
+      <%= f.text_field :num %>
+      <%= f.label :name %> 
+      <%= f.text_field :name %><br>
+      <%= f.submit "送信" %>
+    <% end %>
+  </div>
+
+</div>

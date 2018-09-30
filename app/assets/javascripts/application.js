@@ -64,7 +64,7 @@ $(function() {
 			//canvasにコピー
 			ctx.drawImage(video, 0, 0, w, h);
 			//imgにpng形式で書き出し
-			img.src = canvas.toDataURL('image/png');
+			img.src = canvas.toDataURL('image/jpeg');
 			
 		}
 	});
@@ -89,20 +89,74 @@ $(function() {
 			img.src = canvas.toDataURL('image/png');
 			
 		}
-	})
+	});
 	$('#save-button').click(function(){
 		var canvas = document.getElementById('canvas');
 		// var img = document.getElementById('img');
 		// var ctx = canvas.getContext('2d');
-		// alert("url")
-		url = canvas.toDataURL('image/jpeg');
-		// hdle_id = "10"
-		// alert(url.length);
+		
+		var url = canvas.toDataURL('image/jpeg');
+		// base64データをblobに変換
+    // var blob = dataURLtoBlob(url);
+    	// Create new form data
+		// var fd = new FormData();
+		
+		// Append our Canvas image file to the form data
+		// fd.append("image", blob);
+	
+		// And send it
+		// $.ajax({
+		//   url: "/headlines",
+		//   type: "POST",
+		//   data: fd,
+		//   processData: false,
+		//   contentType: false,
+		// });
+    	// バイナリ形式からURLオブジェクトに変換
+	    // var urlfromblob = URL.createObjectURL(blob);
+	    // alert(urlfromblob)
+		
+	
 		$("#picture_image_url").val(""); 
 		$("#picture_image_url").val(url);
-		alert(url)
-		// $("#picture_headline_id").val(hdle_id);
+		$("#picture_blobpic").val(""); 
+		$("#picture_blobpic").val("");
 		$("#new_picture").submit();
 	});
 });
 
+		
+
+// Base64データをBlobデータに変換
+function Base64toBlob(base64)
+{
+    // カンマで分割して以下のようにデータを分ける
+    // tmp[0] : データ形式（data:image/png;base64）
+    // tmp[1] : base64データ（iVBORw0k～）
+    var tmp = base64.split(',');
+    // base64データの文字列をデコード
+    var data = atob(tmp[1]);
+    // tmp[0]の文字列（data:image/png;base64）からコンテンツタイプ（image/png）部分を取得
+		var mime = tmp[0].split(':')[1].split(';')[0];
+	    //  1文字ごとにUTF-16コードを表す 0から65535 の整数を取得
+		var buf = new Uint8Array(data.length);
+		for (var i = 0; i < data.length; i++) {
+	        buf[i] = data.charCodeAt(i);
+	    }
+	    // blobデータを作成
+		var blob = new Blob([buf], { type: mime });
+	    return blob;
+}		
+
+function dataURLtoBlob(dataURL) {
+	  // Decode the dataURL
+	  var binary = atob(dataURL.split(',')[1]);
+	  // Create 8-bit unsigned array
+	  var array = [];
+	  for(var i = 0; i < binary.length; i++) {
+	      array.push(binary.charCodeAt(i));
+	  }
+	  // Return our Blob object
+	  blob = new Blob([new Uint8Array(array)], {type: 'image/jpeg'});
+	  return blob;
+	}
